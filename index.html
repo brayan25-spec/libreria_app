@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Universidad de los Andes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<!-- Pantalla de bienvenida -->
+<div id="pantallaBienvenida" class="bienvenida">
+    <div class="bienvenida-contenido">
+        <h1>📚 Bienvenido</h1>
+        <p>Has ingresado a la <b>Biblioteca de los Andes</b></p>
+        <button id="btnAceptar">Aceptar</button>
+    </div>
+</div>
+
+<!-- Contenido principal oculto -->
+<div id="app" style="display:none;">
+    <h1>📚 Sistema de Gestión de Biblioteca</h1>
+
+    <div class="contenedor-tablas">
+
+        <!-- LIBROS -->
+        <section>
+            <h2>Libros</h2>
+            <form id="formLibros">
+                <input type="text" name="id" placeholder="Id" required>
+                <input type="text" name="titulo" placeholder="Título" required>
+                <input type="text" name="autor" placeholder="Autor" required>
+                <input type="text" name="isbn" placeholder="ISBN" required>
+                <input type="number" name="año_publicacion" placeholder="Año de Publicación" required>
+                <input type="text" name="codigo_estante" placeholder="Código Estante" required>
+                <select name="disponible" required>
+                    <option value="">Disponible?</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+                <button type="submit">Agregar</button>
+            </form>
+
+            <label for="columnaFiltroLibros">Filtrar por:</label>
+            <select id="columnaFiltroLibros">
+                <option value="todos">Todos</option>
+                <option value="titulo">Título</option>
+                <option value="autor">Autor</option>
+                <option value="isbn">ISBN</option>
+                <option value="año_publicacion">Año Publicación</option>
+                <option value="codigo_estante">Código Estante</option>
+                <option value="disponible">Disponible</option>
+            </select>
+            <input type="text" id="filtroLibros" placeholder="Escribe para filtrar...">
+
+            <table id="tablaLibros">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>isbn</th>
+                    <th>año_publicacion</th>
+                    <th>codigo_estante</th>
+                    <th>disponible</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <!-- ESTUDIANTES -->
+        <section>
+            <h2>Estudiantes</h2>
+            <form id="formEstudiantes">
+                <input type="text" name="id" placeholder="Id" required>
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="codigo_estudiante" placeholder="Código Estudiante" required>
+                <button type="submit">Agregar</button>
+            </form>
+
+            <label for="columnaFiltroEstudiantes">Filtrar por:</label>
+            <select id="columnaFiltroEstudiantes">
+                <option value="todos">Todos</option>
+                <option value="nombre">Nombre</option>
+                <option value="email">Email</option>
+                <option value="codigo_estudiante">Código Estudiante</option>
+            </select>
+            <input type="text" id="filtroEstudiantes" placeholder="Escribe para filtrar...">
+
+            <table id="tablaEstudiantes">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>nombre</th>
+                    <th>email</th>
+                    <th>codigo_estudiante</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <!-- ESTANTES -->
+        <section>
+            <h2>Estantes</h2>
+            <form id="formEstantes">
+                <input type="text" name="id" placeholder="Id" required>
+                <input type="text" name="ubicacion" placeholder="Ubicación" required>
+                <input type="text" name="tema" placeholder="Tema" required>
+                <input type="text" name="material" placeholder="Material" required>
+                <input type="number" name="cantidad_libros" placeholder="Cantidad de Libros" required>
+                <button type="submit">Agregar</button>
+            </form>
+
+            <label for="columnaFiltroEstantes">Filtrar por:</label>
+            <select id="columnaFiltroEstantes">
+                <option value="todos">Todos</option>
+                <option value="ubicacion">Ubicación</option>
+                <option value="tema">Tema</option>
+                <option value="material">Material</option>
+                <option value="cantidad_libros">Cantidad Libros</option>
+            </select>
+            <input type="text" id="filtroEstantes" placeholder="Escribe para filtrar...">
+
+            <table id="tablaEstantes">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ubicacion</th>
+                    <th>tema</th>
+                    <th>material</th>
+                    <th>cantidad_libros</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <!-- PRÉSTAMOS -->
+        <section>
+            <h2>Préstamos</h2>
+            <form id="formPrestamos">
+                <input type="text" name="id" placeholder="Id" required>
+                <input type="text" name="codigo_libro" placeholder="Código Libro" required>
+                <input type="text" name="codigo_estudiante" placeholder="Código Estudiante" required>
+                <input type="date" name="loan_date" placeholder="Fecha Préstamo" required>
+                <input type="date" name="fecha_estimada_devo" placeholder="Fecha Estimada Devolución" required>
+                <input type="date" name="fecha_actual_devo" placeholder="Fecha Actual Devolución">
+                <button type="submit">Agregar</button>
+            </form>
+
+            <label for="columnaFiltroPrestamos">Filtrar por:</label>
+            <select id="columnaFiltroPrestamos">
+                <option value="todos">Todos</option>
+                <option value="codigo_libro">Código Libro</option>
+                <option value="codigo_estudiante">Código Estudiante</option>
+                <option value="loan_date">Fecha Préstamo</option>
+                <option value="fecha_estimada_devo">Fecha Estimada Devolución</option>
+                <option value="fecha_actual_devo">Fecha Actual Devolución</option>
+            </select>
+            <input type="text" id="filtroPrestamos" placeholder="Escribe para filtrar...">
+
+            <table id="tablaPrestamos">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>codigo_libro</th>
+                    <th>codigo_estudiante</th>
+                    <th>loan_date</th>
+                    <th>fecha_estimada_devo</th>
+                    <th>fecha_actual_devo</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </div>
+</div>
+
+<script>
+    const columnas = {
+        tablaLibros: ["id", "titulo", "autor", "isbn", "año_publicacion", "codigo_estante", "disponible"],
+        tablaEstudiantes: ["id", "nombre", "email", "codigo_estudiante"],
+        tablaEstantes: ["id", "ubicacion", "tema", "material", "cantidad_libros"],
+        tablaPrestamos: ["id", "codigo_libro", "codigo_estudiante", "loan_date", "fecha_estimada_devo", "fecha_actual_devo"]
+    };
+
+    function agregarFiltro(inputId, selectId, datos, tablaId) {
+        const input = document.getElementById(inputId);
+        const select = document.getElementById(selectId);
+
+        function filtrar() {
+            const textoFiltro = input.value.toLowerCase();
+            const columna = select.value;
+
+            const filtrados = datos.filter(item => {
+                if (columna === "todos") {
+                    return columnas[tablaId]
+                        .filter(c => c !== "id")
+                        .some(col => String(item[col] || "").toLowerCase().includes(textoFiltro));
+                } else {
+                    return String(item[columna] || "").toLowerCase().includes(textoFiltro);
+                }
+            });
+
+            mostrarTabla(filtrados, tablaId);
+        }
+
+        input.addEventListener('input', filtrar);
+        select.addEventListener('change', filtrar);
+    }
+
+    async function cargarDatos(url, tablaId, filtroId, selectId) {
+        try {
+            const res = await fetch(url);
+            const datos = await res.json();
+            mostrarTabla(datos, tablaId);
+            agregarFiltro(filtroId, selectId, datos, tablaId);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+    function mostrarTabla(datos, tablaId) {
+        const tbody = document.querySelector(`#${tablaId} tbody`);
+        tbody.innerHTML = '';
+        datos.forEach(item => {
+            const fila = document.createElement('tr');
+            columnas[tablaId].forEach(col => {
+                const celda = document.createElement('td');
+                celda.textContent = item[col] !== undefined ? item[col] : "";
+                fila.appendChild(celda);
+            });
+            tbody.appendChild(fila);
+        });
+    }
+
+    function manejarFormulario(formId, endpoint, tablaId, filtroId, selectId) {
+        document.getElementById(formId).addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            if (data.disponible !== undefined) {
+                data.disponible = data.disponible === "true";
+            }
+            try {
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) throw new Error("Error en POST");
+                const nuevoRegistro = await res.json();
+                alert("Registro agregado con éxito");
+                cargarDatos(endpoint, tablaId, filtroId, selectId);
+                this.reset();
+            } catch (error) {
+                console.error(error);
+                alert("Error al agregar el registro");
+            }
+        });
+    }
+
+    cargarDatos('/api/libros', "tablaLibros", "filtroLibros", "columnaFiltroLibros");
+    cargarDatos('/api/estudiantes', "tablaEstudiantes", "filtroEstudiantes", "columnaFiltroEstudiantes");
+    cargarDatos('/api/estantes', "tablaEstantes", "filtroEstantes", "columnaFiltroEstantes");
+    cargarDatos('/api/prestamos', "tablaPrestamos", "filtroPrestamos", "columnaFiltroPrestamos");
+
+    manejarFormulario("formLibros", "/api/libros", "tablaLibros", "filtroLibros", "columnaFiltroLibros");
+    manejarFormulario("formEstudiantes", "/api/estudiantes", "tablaEstudiantes", "filtroEstudiantes", "columnaFiltroEstudiantes");
+    manejarFormulario("formEstantes", "/api/estantes", "tablaEstantes", "filtroEstantes", "columnaFiltroEstantes");
+    manejarFormulario("formPrestamos", "/api/prestamos", "tablaPrestamos", "filtroPrestamos", "columnaFiltroPrestamos");
+
+    document.getElementById("btnAceptar").addEventListener("click", () => {
+        document.getElementById("pantallaBienvenida").style.display = "none";
+        document.getElementById("app").style.display = "block";
+    });
+</script>
+</body>
+</html>
