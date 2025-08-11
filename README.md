@@ -14,6 +14,13 @@ Este proyecto es una aplicación web que permite gestionar libros, estudiantes, 
 pip install -r requirements.txt
 python api.py
 
+- Instalar Flask framework
+
+    py -m pip install flask requests
+
+    py api.py
+
+
 ### Abrir en el navegador
 http://127.0.0.1:5000
 
